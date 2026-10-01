@@ -2,31 +2,30 @@ class Solution {
     public boolean canConstruct(String ransomNote, String magazine) {
 
 
-        HashMap<Character, Integer>  count = new HashMap<>();
 
-        char[] rArray = ransomNote.toCharArray();
-        char[] mArray = magazine.toCharArray();
-
-        for (char mag : mArray){
-            count.put((mag), count.getOrDefault(mag, 0) + 1);
+        if(ransomNote.length()> magazine.length()){
+            return false;
         }
 
-        for (char ran : rArray){
-            
-            if (count.containsKey(ran) && count.get(ran) > 0){
-                count.put(ran, count.get(ran)-1);
-            }else{
-                return false;
-            }
+
+        int[] count = new int[26];
 
 
+           for (char m : magazine.toCharArray()){
+                 count[m-'a']++;
+
+           }
+
+           for (char n : ransomNote.toCharArray()){
+                if (count[n-'a'] > 0 ){
+                    count[n-'a']--;
+                }else {
+                    return false;
+                }
+
+           }
 
 
-        
-        }
-   return true;
-
-
-                
+                return true;
     }
 }
